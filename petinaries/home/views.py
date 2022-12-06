@@ -6,36 +6,37 @@ from django.contrib.auth.models import User
 def index(request):
     return render(request,"index.html")
 
-def test(request):
-    val="Python"
-    val2="java"
-   
-    return render(request,"test.html",{"a":val,"b":val2})
+
 
 def register(request):
     return render(request,"register.html")
 
 def login(request):
-    return render(request,"login.html")
-
-def sub(request):
-    username=request.GET["uname"]
-    password=request.GET["pname"]
-    check=auth.authenticate(username=username,password=password)
-    if check is not None:
-        auth.login(request,check)
-        return redirect("/")
+    if request.method=="POST":
+        username=request.POST["uname"]
+        password=request.POST["pname"]
+        check=auth.authenticate(username=username,password=password)
+        if check is not None:
+            auth.login(request,check)
+            return redirect("/")
+        else:
+            msg="invalid username or password"
+            return render(request,"login.html",{"c":msg})
     else:
-        msg="invalid username or password"
-        return render(request,"test.html",{"c":msg})
+        return render(request,"login.html")
+
+
+
+
+
 
 def reg2(request):
-    firstname=request.GET["fname"]
-    lastname=request.GET["lname"]
-    username=request.GET["uname"]
-    email=request.GET["ename"]
-    password=request.GET["pname"]
-    repassword=request.GET["re-pname"]
+    firstname=request.POST["fname"]
+    lastname=request.POST["lname"]
+    username=request.POST["uname"]
+    email=request.POST["ename"]
+    password=request.POST["pname"]
+    repassword=request.POST["re-pname"]
     ucheck=User.objects.filter(username=username)
     
     echeck=User.objects.filter(email=email)

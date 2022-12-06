@@ -5,7 +5,8 @@
     </head>
     <body background="{% static 'img/pexels-dominika-roseclay-977736 (3).jpg' %}">
         <center>
-            <form action="sub2">
+            {%csrf_token%}
+            <form action="{% url 'registerpage' %}">
             <div style="width:500px;height:500px;;background-color:rgba(248, 248, 248, 0.37);margin-top:100px;border-radius:20px;outline:none;padding-top:20px">
         
         <label for="First Name"><b>First Name</b></label>
