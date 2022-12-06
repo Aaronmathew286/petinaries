@@ -9,7 +9,38 @@ def index(request):
 
 
 def register(request):
-    return render(request,"register.html")
+    if request.method=="POST":
+        firstname=request.POST["fname"]
+        lastname=request.POST["lname"]
+        username=request.POST["uname"]
+        email=request.POST["ename"]
+        password=request.POST["pname"]
+        repassword=request.POST["re-pname"]
+        ucheck=User.objects.filter(username=username)
+        
+        echeck=User.objects.filter(email=email)
+
+    
+        if ucheck:
+            msg="username already taken"
+            return render(request,"register.html",{"c":msg})
+
+        elif echeck:
+            msg="email exist"
+            return render(request,"register.html",{"c":msg})
+
+        elif password==" " or password!=repassword:
+            msg="password is wrong"
+            
+            return render(request,"register.html",{"c":msg})
+
+        else:
+            user=User.objects.create_user(username=username,first_name=firstname,last_name=lastname,email=email,password=password)
+            user.save();
+            return redirect("/")
+
+    else:
+        return render(request,"register.html")
 
 def login(request):
     if request.method=="POST":
@@ -30,35 +61,6 @@ def login(request):
 
 
 
-def reg2(request):
-    firstname=request.POST["fname"]
-    lastname=request.POST["lname"]
-    username=request.POST["uname"]
-    email=request.POST["ename"]
-    password=request.POST["pname"]
-    repassword=request.POST["re-pname"]
-    ucheck=User.objects.filter(username=username)
-    
-    echeck=User.objects.filter(email=email)
-
-    
-    if ucheck:
-        msg="username already taken"
-        return render(request,"test.html",{"c":msg})
-
-    elif echeck:
-        msg="email exist"
-        return render(request,"test.html",{"c":msg})
-
-    elif password==" " or password!=repassword:
-        msg="password is wrong"
-        
-        return render(request,"test.html",{"c":msg})
-
-    else:
-        user=User.objects.create_user(username=username,first_name=firstname,last_name=lastname,email=email,password=password)
-        user.save();
-        return redirect("/")
 
 
 

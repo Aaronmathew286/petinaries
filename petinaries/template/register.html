@@ -5,8 +5,9 @@
     </head>
     <body background="{% static 'img/pexels-dominika-roseclay-977736 (3).jpg' %}">
         <center>
-            {%csrf_token%}
-            <form action="{% url 'registerpage' %}">
+            
+            <form action="{% url 'registerpage' %}" method="post">
+                {% csrf_token %}
             <div style="width:500px;height:500px;;background-color:rgba(248, 248, 248, 0.37);margin-top:100px;border-radius:20px;outline:none;padding-top:20px">
         
         <label for="First Name"><b>First Name</b></label>
@@ -35,8 +36,9 @@
 
    
     <button type="submit" class="registerbtn" required style="background-color:aqua ;width:280px;height:30px;border:none;border-bottom:2px solid rgba(101, 240, 233, 0.267);border-radius:10px;margin-bottom:20px;outline:none;padding-left:10px">Register</button>
-
+    <font color="red">{{c}}</font>
         </form>
+        
         </div>
         </center>
   </div>
