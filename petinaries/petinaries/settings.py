@@ -82,9 +82,9 @@ WSGI_APPLICATION = 'petinaries.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': "petinaries_db",
+        'NAME': "pet",
         'USER': "root",
-        'PASSWORD': "aaronmathew",
+        'PASSWORD': "1234",
         'HOST': "localhost"
     }
 }
