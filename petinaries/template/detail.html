@@ -118,7 +118,12 @@
              
                 </div>
                 <!-- Blog Detail End -->
+                <div>
+                    {% for i in abc %}
+                    <img src="{{i.img.url}}" width="150px" height="150px">
+                    {% endfor %}
 
+                </div>
                 <!-- Comment List Start -->
                 <div class="mb-5">
                     <h3 class="text-uppercase border-start border-5 border-primary ps-3 mb-4">Comments({{ pro.comments.all | length }})</h3>
@@ -205,12 +210,6 @@
 
                 </div>
                 <!-- Price with Discount End -->
-
-                <!-- Image Start -->
-                <div class="mb-5">
-                    <img src="{% static 'img/blog-1.jpg' %}" alt="" class="img-fluid rounded">
-                </div>
-                <!-- Image End -->
 
 
                 
