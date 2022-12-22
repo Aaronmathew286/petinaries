@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib import auth
 from django.contrib.auth.models import User
 from home.models import PetProducts
+from django.core.cache import cache
 
 
 
@@ -32,3 +33,14 @@ def detail(request):
         return render(request,"detail.html",{"pro":data,"total":total})
 
 
+def detail2(request):
+    id=request.GET["id"]
+    if cache.get(id):
+        print("data from cache")
+        data=cache.get(id)
+    else:
+        print("data from database")
+        data=PetProducts.objects.get(id=id)
+        cache.set(id,data)
+    total=int(data.price)-(int(data.price)*int(data.discount)/100)
+    return render(request,"detail.html",{"pro":data,"total":total})

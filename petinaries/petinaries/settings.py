@@ -88,7 +88,19 @@ DATABASES = {
         'HOST': "localhost"
     }
 }
-
+#Caching
+CACHE_TTM=60*1500
+CACHE={
+    'default':{
+        'BACKEND':'django.redis.cash.RedisCache',
+        'LOCATION':'radis://127.0.0.1:6379/1',
+        'OPTIONS':{
+            'CLIENT_CLASS':'django_radis.client.DefaultClient',
+        },
+        'KEEP_PERFIX':'example',
+    }
+}
+#End Caching
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
