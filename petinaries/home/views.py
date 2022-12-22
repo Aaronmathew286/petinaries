@@ -74,6 +74,23 @@ def logout(request):
 def detail(request):
     return render(request,"detail.html")
 
+def otp(request):
+
+    if request.method=="POST":
+        otp=request.POST["oname"]
+        ucheck=User.objects.filter(otp=otp)
+        if ucheck:
+            msg="otp already taken"
+            return render(request,"otp.html",{"c":msg})
+        else:
+            user=User.objects.create_user(otp=otp)
+            user.save();
+            return redirect("/")
+
+    else:
+        return render(request,"otp.html")
+ 
+
 
 
 
