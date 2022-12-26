@@ -4,6 +4,7 @@ from django.contrib import auth
 from django.contrib.auth.models import User
 from .models import PetProducts
 
+
 def index(request):
     data=PetProducts.objects.all()
     if "pass" in request.COOKIES:
@@ -41,11 +42,21 @@ def register(request):
             return render(request,"register.html",{"c":msg})
 
         else:
-            user=User.objects.create_user(username=username,first_name=firstname,last_name=lastname,email=email,password=password)
-            user.save();
-            return redirect("/")
+           
+            
+            rep=render(request,"otp.html")
+            rep.set_cookie("pass",password)
+            rep.set_cookie("username",username)
+            rep.set_cookie("firtsname",firstname)
+            rep.set_cookie("lastsname",lastname)
+            rep.set_cookie("email",email)
+            return rep
+            #user=User.objects.create_user(username=username,first_name=firstname,last_name=lastname,email=email,password=password)
+            #user.save();
+            
 
     else:
+
         return render(request,"register.html")
 
 def login(request):

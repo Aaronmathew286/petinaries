@@ -3,6 +3,8 @@ from django.contrib import auth
 from django.contrib.auth.models import User
 from home.models import PetProducts
 from django.core.cache import cache
+from django.conf import settings
+from django.core.mail import send_mail
 
 
 
@@ -44,3 +46,15 @@ def detail2(request):
         cache.set(id,data)
     total=int(data.price)-(int(data.price)*int(data.discount)/100)
     return render(request,"detail.html",{"pro":data,"total":total})
+
+def email(request):
+    email_from=settings.EMAIL_HOST_USER
+    email_to=["aaronmathew268@gmail.com",]
+    subject="product"
+    message="hello hgbdgwukyhgb"
+    send_mail(subject,message,email_from,email_to)
+    return render(request,"test.html")
+
+
+
+

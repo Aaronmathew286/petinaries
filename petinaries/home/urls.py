@@ -11,7 +11,7 @@ urlpatterns = [
     path("login",views.login,name="loginpage"),
     path("logout",views.logout,name="logoutpage"),
     path("otp/",views.otp,name="otppage"),
-    path("feed/",feed.latestproduct())
+    path("feed/",feed.latestproduct()),
 
 
 ]
