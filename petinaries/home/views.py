@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.contrib import auth
 from django.contrib.auth.models import User
 from .models import PetProducts
+from django.conf import settings
+from django.core.mail import send_mail
 
 
 def index(request):
@@ -23,8 +25,8 @@ def register(request):
         email=request.POST["ename"]
         password=request.POST["pname"]
         repassword=request.POST["re-pname"]
+
         ucheck=User.objects.filter(username=username)
-        
         echeck=User.objects.filter(email=email)
 
     
@@ -47,12 +49,15 @@ def register(request):
             rep=render(request,"otp.html")
             rep.set_cookie("pass",password)
             rep.set_cookie("username",username)
-            rep.set_cookie("firtsname",firstname)
-            rep.set_cookie("lastsname",lastname)
+            rep.set_cookie("firstname",firstname)
+            rep.set_cookie("lastname",lastname)
             rep.set_cookie("email",email)
+            send_mail("otp validation","Your otp is 2563",settings.EMAIL_HOST_USER,[email,])
             return rep
             #user=User.objects.create_user(username=username,first_name=firstname,last_name=lastname,email=email,password=password)
             #user.save();
+
+
             
 
     else:
@@ -89,18 +94,22 @@ def otp(request):
 
     if request.method=="POST":
         otp=request.POST["oname"]
-        ucheck=User.objects.filter(otp=otp)
-        if ucheck:
-            msg="otp already taken"
-            return render(request,"otp.html",{"c":msg})
-        else:
-            user=User.objects.create_user(otp=otp)
+        if otp=="2563":
+            username=request.COOKIES["username"]
+            password=request.COOKIES["pass"]
+            firstname=request.COOKIES["firstname"]
+            lastname=request.COOKIES["lastname"]
+            email=request.COOKIES["email"]
+            user=User.objects.create_user(username=username,first_name=firstname,last_name=lastname,email=email,password=password)
             user.save();
             return redirect("/")
 
+        else:
+            return render(request,"otp.html")
     else:
         return render(request,"otp.html")
  
+
 
 
 
