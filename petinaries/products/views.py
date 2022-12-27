@@ -10,8 +10,8 @@ from django.core.mail import send_mail
 
 
 def detail(request):
-    id=request.GET["id"]
 
+    id=request.GET["id"]
     data=PetProducts.objects.get(id=id)
     total=int(data.price)-(int(data.price)*int(data.discount)/100)
 
@@ -47,11 +47,12 @@ def detail2(request):
     total=int(data.price)-(int(data.price)*int(data.discount)/100)
     return render(request,"detail.html",{"pro":data,"total":total})
 
+
 def email(request):
     email_from=settings.EMAIL_HOST_USER
     email_to=["aaronmathew268@gmail.com",]
     subject="product"
-    message="hello hgbdgwukyhgb"
+    message="hello"
     send_mail(subject,message,email_from,email_to)
     return render(request,"test.html")
 

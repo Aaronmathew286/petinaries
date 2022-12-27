@@ -52,7 +52,12 @@ def register(request):
             rep.set_cookie("firstname",firstname)
             rep.set_cookie("lastname",lastname)
             rep.set_cookie("email",email)
-            send_mail("otp validation","Your otp is 2563",settings.EMAIL_HOST_USER,[email,])
+            #otp creation
+            l1=len(username)
+            l2=len(password)
+            l3=l1+l2*54321
+            l4=str(l3)[:5]
+            send_mail("otp validation",f"Your otp is {l4}",settings.EMAIL_HOST_USER,[email,])
             return rep
             #user=User.objects.create_user(username=username,first_name=firstname,last_name=lastname,email=email,password=password)
             #user.save();
@@ -93,8 +98,15 @@ def detail(request):
 def otp(request):
 
     if request.method=="POST":
+        username=request.COOKIES["username"]
+        password=request.COOKIES["pass"]
         otp=request.POST["oname"]
-        if otp=="2563":
+        l1=len(username)
+        l2=len(password)
+        l3=l1+l2*54321
+        l4=str(l3)[:5]
+
+        if otp==l4:
             username=request.COOKIES["username"]
             password=request.COOKIES["pass"]
             firstname=request.COOKIES["firstname"]
@@ -102,6 +114,7 @@ def otp(request):
             email=request.COOKIES["email"]
             user=User.objects.create_user(username=username,first_name=firstname,last_name=lastname,email=email,password=password)
             user.save();
+            auth.login(request,user)
             return redirect("/")
 
         else:
