@@ -5,6 +5,7 @@ from home.models import PetProducts
 from django.core.cache import cache
 from django.conf import settings
 from django.core.mail import send_mail
+from django.http.response import JsonResponse
 
 
 
@@ -56,6 +57,10 @@ def email(request):
     send_mail(subject,message,email_from,email_to)
     return render(request,"test.html")
 
-
+def autosearch(request):
+    if 'term' in request.GET:
+        req=request.GET["term"]
+        print("hello",req)
+    return render(request,"test.html")
 
 

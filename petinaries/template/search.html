@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Autocomplete - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  
+  <script>
+  $( function() {
+
+    $( "#tags" ).autocomplete({
+      source: "{% url 'autopage' %}"
+    });
+  } );
+  </script>
+</head>
+<body>
+ 
+<div class="ui-widget">
+  <form action="{% url 'searchpage' %}" method="POST">
+    {% csrf_token %}
+  <div class="d-flex align-items-center justify-content-center justify-content-lg-start pt-5">
+  <input style="width:400px;height:30px;height:35px;border:none" name="msg" id="tags">
+  <button style="margin-left:10px;background-color:#7ab730;border:none;color:white;height:35px">
+    Search
+  </button>
+  {{c}}
+  </div>
+  </form>
+</div>
+ 
+ 
+</body>
+</html>

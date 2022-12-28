@@ -28,7 +28,6 @@ def register(request):
 
         ucheck=User.objects.filter(username=username)
         echeck=User.objects.filter(email=email)
-
     
         if ucheck:
             msg="username already taken"
@@ -122,6 +121,9 @@ def otp(request):
     else:
         return render(request,"otp.html")
  
+def search(request):
+    return render(request,"search.html")
+
 
 
 

@@ -7,5 +7,6 @@ urlpatterns = [
   
     path("",views.detail2,name="detail"),
     path("test/",views.email,name="mailpage"),
+    path("auto/",views.autosearch,name="autopage"),
 
 ]

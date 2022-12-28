@@ -1,14 +1,21 @@
+{% load static %}
 <html>
     <head>
         <title>email</title>
     </head>
     <body bgcolor="skyblue">
-        <center>
-            <h1><i>Details of user</i></h1>
-            <p>Message send to your email</p>
 
+        <center>
+            <form action="{% url 'searchpage' %}" method="post">
+                {% csrf_token %}
+                <div style="width:400px;height:300px;;background-color:rgba(248, 248, 248, 0.37);margin-top:100px;border-radius:20px;outline:none;padding-top:20px">
+            <h1><i>Details of user</i></h1>
+            <p>Message you send is:{{c}}</p>
+                </div>
+            </form>
 
         
         </center>
+
     </body>
 </html>
