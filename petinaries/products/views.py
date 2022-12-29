@@ -58,9 +58,18 @@ def email(request):
     return render(request,"test.html")
 
 def autosearch(request):
+
     if 'term' in request.GET:
         req=request.GET["term"]
-        print("hello",req)
+        print("hello",req)        
+
+        pro=PetProducts.objects.filter(name__istartswith=req)
+        li=[]
+        for i in pro:
+            li.append(i.name)
+        print(li)
+        return JsonResponse(li,safe=False)
+        
     return render(request,"test.html")
 
 

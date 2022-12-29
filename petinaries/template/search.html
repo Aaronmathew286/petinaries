@@ -18,14 +18,14 @@
   } );
   </script>
 </head>
-<body>
- 
-<div class="ui-widget">
-  <form action="{% url 'searchpage' %}" method="POST">
+<body bgcolor="black">
+ <center>
+<div class="ui-widget" style="padding:10px;margin-top:150px;height:200px;padding-top:150px;">
+  <form action="{% url 'homepage' %}" method="POST">
     {% csrf_token %}
   <div class="d-flex align-items-center justify-content-center justify-content-lg-start pt-5">
   <input style="width:400px;height:30px;height:35px;border:none" name="msg" id="tags">
-  <button style="margin-left:10px;background-color:#7ab730;border:none;color:white;height:35px">
+  <button style="margin-left:10px;background-color:#7ab730;border:none;color:white;height:40px">
     Search
   </button>
   {{c}}
@@ -33,6 +33,6 @@
   </form>
 </div>
  
- 
+ </center>
 </body>
 </html>

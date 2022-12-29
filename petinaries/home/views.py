@@ -8,13 +8,15 @@ from django.core.mail import send_mail
 
 
 def index(request):
-    data=PetProducts.objects.all()
-    if "pass" in request.COOKIES:
-        a=request.COOKIES["pass"]
-        
-        return render(request,"index.html",{"pro":data,"cook":a})
+
+    if request.method=="POST":
+        msg=request.POST["msg"]
+        data=PetProducts.objects.filter(name__istartswith=msg)
     else:
-        return render(request,"index.html",{"pro":data})
+        data=PetProducts.objects.all()
+
+    
+    return render(request,"index.html",{"pro":data})
 
 
 def register(request):
@@ -122,6 +124,7 @@ def otp(request):
         return render(request,"otp.html")
  
 def search(request):
+
     return render(request,"search.html")
 
 
