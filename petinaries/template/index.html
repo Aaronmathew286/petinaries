@@ -98,6 +98,13 @@
                 <a href="register" class="nav-item nav-link">Register</a>
                 {% endif %}
                 <a href="{% url 'searchpage' %}" class="nav-item nav-link">Search</a>
+                {% if user.is_authenticated %}
+                {% if user.is_staff %}
+                <a href="{% url 'staffpage' %}" class="nav-item nav-link">Staff</a>
+                {% endif %}
+                {% endif %}
+                
+                
                 
 
         

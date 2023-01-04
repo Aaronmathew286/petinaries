@@ -127,6 +127,8 @@ def search(request):
 
     return render(request,"search.html")
 
+def staff(request):
+    return render(request,"staff.html")
 
 
 

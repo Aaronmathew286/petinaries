@@ -72,4 +72,6 @@ def autosearch(request):
         
     return render(request,"test.html")
 
+def checkout(request):
+    return render(request,"checkout.html")
 
